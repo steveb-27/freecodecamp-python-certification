@@ -1,3 +1,6 @@
+from math import sqrt
+
+
 class Rectangle:
     def __init__(self, width, height):
         self._width = width
@@ -38,7 +41,12 @@ class Rectangle:
         return sqrt(self.width ** 2 + self.height ** 2)
 
     def get_picture(self):
-        return '\n'.join([''.ljust(self.width, '*') for line in range(self.height)])
+        if self.width > 50 or self.height > 50:
+            return 'Too big for picture.'
+        return '\n'.join([
+            ''.ljust(self.width, '*')
+            for line in range(self.height)
+        ]) + '\n'
 
     def get_amount_inside(self, shape):
         across = self.width // shape.width
@@ -48,6 +56,12 @@ class Rectangle:
 
 
 class Square(Rectangle):
+    def __init__(self, side):
+        super().__init__(side, side)
+
+        self.height = side
+        self.width = side
+
     def __str__(self):
         return f'Square(side={self.width})'
 
@@ -62,5 +76,20 @@ class Square(Rectangle):
         self.height = value
 
 
-rectangle = Rectangle(3, 4)
-print(rectangle.get_picture())
+rect = Rectangle(10, 5)
+print(rect.get_area())
+rect.set_height(3)
+print(rect.get_perimeter())
+print(rect)
+print(rect.get_picture())
+
+sq = Square(9)
+print(sq.get_area())
+sq.set_side(4)
+print(sq.get_diagonal())
+print(sq)
+print(sq.get_picture())
+
+rect.set_height(8)
+rect.set_width(16)
+print(rect.get_amount_inside(sq))
