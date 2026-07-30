@@ -3,7 +3,7 @@ class HashTable:
         self.collection = dict()
 
     def hash(self, key):
-        pass
+        return sum([ord(char) for char in key])
 
     def add(self, key, value):
         pass
@@ -13,3 +13,9 @@ class HashTable:
 
     def lookup(self, key):
         pass
+
+
+key = 'golf'
+hashkey = HashTable().hash(key)
+
+print(f"{key}: {hashkey}")
